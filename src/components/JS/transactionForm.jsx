@@ -1,10 +1,11 @@
 //Forms for different Transactions
 import { useState } from 'react';
 import { AccountFacts, processTransaction } from '../../services/AccountData.js';
+import Notifications from './notifications.jsx';
 import '../css/transactionForm.css';
 
 
-function Transactions({ balances, setters, setTransactions }){
+const Transactions = ({ balances, setters, setTransactions, setNotifications }) => {
     const [activeAccount, setActiveAccount] = useState("debit");
 
     //Deposit State
@@ -28,6 +29,7 @@ function Transactions({ balances, setters, setTransactions }){
         const result = processTransaction(balances[currentBalanceKey], "Deposit",
                                           depositAmount);
         if (!result.success) {
+            setNotifications({ type: "error", result.message });
             alert(result.msg);
             return;
         }
@@ -66,6 +68,7 @@ function Transactions({ balances, setters, setTransactions }){
               timestamp: new Date().toLocaleString(),
               balanceAfter: result.newBalance,
           }, ...prev]);
+          setNotifications({ type: "success", msg: `${$depositType} deposit of ${depositAmount} successful!` });
           setTransferForm({ beneficiaryAccount: "", beneficiaryName: "", transferType:
   "SWIFT", amount: "", notes: "" });
       };

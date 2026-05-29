@@ -1,15 +1,25 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import NavBar from './components/JS/navbar.jsx';
 import Account from './components/JS/accountSummary.jsx';
 import Transaction from './components/JS/transactionForm.jsx';
 import TransactionHistory from './components/JS/transactionHistory.jsx';
+import Notifications from './components/JS/notifications.jsx';
+import './style.css';
 
-function App(){
-    const [debitBalance, setDebitBalance] = useState(169420);
-    const [savingsBalance, setSavingsBalance] = useState(42069);
-    const [creditBalance, setCreditBalance] = useState(6969);
-    const [transactions, setTransactions] = useState([]);
 
+
+const [showDetails, setShowDetails] = useState(true);
+
+const App = () => {
+
+    const [notifications, setNotifications] = useState(null);
+
+    useEffect(() => {
+        if(!notifications) return;
+        const timer = setTimeout(() => setNotifications(null), 3000);
+        return () => clearTimeout(timer);  // cleanup cancels the timer if notification changes before 3s
+}, [notification]);
+    })
 
     return (
         <div className="outerContainer">
@@ -22,17 +32,29 @@ function App(){
                 </div>
                 <h4>Welcome back, King Gonzo</h4>
             </div>
-                <div className="mainInput">
+            <div className="notifCont">
+                {notifications && (
+                    <Notifications
+                        notifications={notifications}
+                         onDismiss{() => setNotifications(null)}
+                    />
+                 )}
+            </div>
+
+            <div className="mainInput">
                     <Account
-                      balances={{debitBalance, creditBalance, savingsBalance}}
-                      setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
+                        balances={{debitBalance, creditBalance, savingsBalance}}
+                        showDetails={showDetails}
+                        setShowDetails={setShowDetails}
+                        setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
                         transactions={transactions}
                         setTransactions={setTransactions}
                      />
                     <Transaction
-                      balances={{debitBalance, creditBalance, savingsBalance}}
-                      setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
-                      setTransactions={setTransactions}
+                        balances={{debitBalance, creditBalance, savingsBalance}}
+                        setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
+                        setTransactions={setTransactions}
+                        setNotifications={setNotifications}
                     />
 
                   <TransactionHistory transactions={transactions} />
