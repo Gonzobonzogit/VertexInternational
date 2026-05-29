@@ -4,17 +4,17 @@ export const AccountFacts = {
     debit : {
         name:"Debit Account",
         balance : 169420,
-        actions: ["Transfer", "Pay", "Withdraw"]
+        actions: ["transfer", "pay", "withdraw"]
     },
     savings : {
         name:"Savings Account",
         balance : 42069,
-        actions: ["Transfer", "Deposit", "Withdraw"]
+        actions: ["transfer", "deposit", "withdraw"]
     },
     credit : {
         name:"Credit",
         balance : 6969,
-        actions: ["Pay", "Deposit"]
+        actions: ["pay", "deposit"]
     }
 };
 

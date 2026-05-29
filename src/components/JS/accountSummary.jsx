@@ -15,17 +15,17 @@ const AccountSummary = ({balances, showDetails, setShowDetails}) => {
             msg: "Your current balance is,",
             color: "var(--ctp-blue)"
         },
-        savings: {
+        savings:{
             label: "Savings Account",
             balance: balances.savingsBalance,
-            msg: `You currently have ${savings.balance} saved.`,
+            msg: "Your saved balance is,",
             color: "var(--ctp-green)"
         },
         credit: {
             label: "Credit Account",
             balance: balances.creditBalance,
             msg: "Your current credit is,",
-            color: var(ctp-peach)
+            color: "var(--ctp-peach)"
         }
     };
     
@@ -60,19 +60,19 @@ const AccountSummary = ({balances, showDetails, setShowDetails}) => {
                     className="debitBtn"
                     onClick={()=> setActiveAccount('debit')}
                 >
-                    {`${activeAccount !== 'debit' ? 'Debit' : 'Active'}`}
+                    {`${activeAccount === 'debit' ? 'Active' : 'Debit'}`}
                 </button>
                 <button
                     className="creditBtn"
                     onClick={()=> setActiveAccount('credit')}
                 >
-                    {`${activeAccount} !== 'credit' ? 'Credit' : 'Active'`}
+                    {`${activeAccount === 'credit' ? 'Active' : 'Credit'}`}
                 </button>
                 <button
                     className="savingsBtn"
                     onClick={()=> setActiveAccount('savings')}
                 >
-                    {`${activeAccount} !== 'savings' ? 'Savings' : 'Active'`}
+                    {`${activeAccount === 'savings' ? 'Active' : 'Savings'}`}
                 </button>
             </div>
         </div>
