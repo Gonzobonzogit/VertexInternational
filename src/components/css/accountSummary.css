@@ -1,0 +1,27 @@
+/* accountSummary.css */
+
+.accountContainer {
+    padding: 2rem;
+}
+
+.accountCards {
+    display:   flex;
+    gap:       1.25rem;
+    flex-wrap: wrap;
+}
+
+.accountCardWrapper {
+    flex:      1;
+    min-width: 260px;
+    cursor:    pointer;
+    border-radius: var(--radius-lg);
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.accountCardWrapper:hover {
+    transform: translateY(-2px);
+}
+
+.accountCardWrapper--active .transactionCard {
+    border-color: var(--ctp-mauve);
+}
