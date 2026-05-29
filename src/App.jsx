@@ -8,18 +8,20 @@ import './style.css';
 
 
 
-const [showDetails, setShowDetails] = useState(true);
-
 const App = () => {
 
+    const [showDetails, setShowDetails] = useState(true);
     const [notifications, setNotifications] = useState(null);
+    const [debitBalance, setDebitBalance] = useState(0);
+    const [creditBalance, setCreditBalance] = useState(0);
+    const [savingsBalance, setSavingsBalance] = useState(0);
+    const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
         if(!notifications) return;
         const timer = setTimeout(() => setNotifications(null), 3000);
         return () => clearTimeout(timer);  // cleanup cancels the timer if notification changes before 3s
-}, [notification]);
-    })
+    }, [notifications]);
 
     return (
         <div className="outerContainer">
@@ -36,7 +38,7 @@ const App = () => {
                 {notifications && (
                     <Notifications
                         notifications={notifications}
-                         onDismiss{() => setNotifications(null)}
+                         onDismiss={() => setNotifications(null)}
                     />
                  )}
             </div>

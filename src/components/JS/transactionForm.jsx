@@ -29,8 +29,7 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
         const result = processTransaction(balances[currentBalanceKey], "Deposit",
                                           depositAmount);
         if (!result.success) {
-            setNotifications({ type: "error", result.message });
-            alert(result.msg);
+            setNotifications({ type: "error", message: result.msg });
             return;
         }
         setters[setterKey](result.newBalance);
@@ -68,7 +67,7 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
               timestamp: new Date().toLocaleString(),
               balanceAfter: result.newBalance,
           }, ...prev]);
-          setNotifications({ type: "success", msg: `${$depositType} deposit of ${depositAmount} successful!` });
+          setNotifications({ type: "success", message: `Transfer of $${parseFloat(transferForm.amount).toFixed(2)} successful!` });
           setTransferForm({ beneficiaryAccount: "", beneficiaryName: "", transferType:
   "SWIFT", amount: "", notes: "" });
       };

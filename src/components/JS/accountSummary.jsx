@@ -7,8 +7,6 @@ const AccountSummary = ({balances, showDetails, setShowDetails}) => {
         const str = String(num);
         return "X".repeat(str.length - 2) + str.slice(-2);
     };
-}
-
 
     return(
         <div className="accountContainer">
@@ -16,8 +14,8 @@ const AccountSummary = ({balances, showDetails, setShowDetails}) => {
             className="privacyBtn"
             type="checkbox"
             name={showDetails ? "Hide" : "Show"}
-            checked={() => setShowDetails(prev => !prev)}
-            onChange={hideAccount}
+            checked={showDetails}
+            onChange={() => setShowDetails(prev => !prev)}
             />
 
 
