@@ -1,38 +1,20 @@
-/*Dracula x catppuccin schemed navBar rules*/
+/* ══════════════════════════════════════════════════════════════ */
+/* Vertex International — Navbar Styling                         */
+/* ══════════════════════════════════════════════════════════════ */
 
-:root{
-  --ctp-base:     #1e1e2e;
-  --ctp-mantle:   #181825;
-  --ctp-surface0: #313244;
-  --ctp-surface1: #45475a;
-  --ctp-overlay0: #6c7086;
-  --ctp-text:     #cdd6f4;
-  --ctp-subtext:  #a6adc8;
-  --ctp-mauve:    #cba6f7;
-  --ctp-lavender: #b4befe;
-  --ctp-pink:     #f38ba8;
-  --ctp-teal:     #94e2d5;
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 70px;
+    background-color: var(--ctp-mantle);
+    border-bottom: 1px solid var(--ctp-surface1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-
-
-/*Outer Bar Container*/
-topBar {
-  display:          flex;
-  align-items:      center;
-  justify-content:  space-between;
-  padding:          0 2rem;
-  height:           70px;
-  background:       var(--ctp-mantle);
-  border-bottom:    1px solid var(--ctp-surface1);
-  position:         sticky;
-  top:              0;
-  z-index:          100;
-  gap:              1rem;
-  box-shadow:       0 4px 10px rgba(0, 0, 0,0.2);
-}
-
-
-/*Left side Branding**/
 
 /* Brand Styling */
 .navBrand {
@@ -178,18 +160,4 @@ topBar {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
