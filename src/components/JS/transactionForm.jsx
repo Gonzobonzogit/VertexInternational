@@ -27,8 +27,12 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
             return;
         }
 
-        //1. process the withdraw action
-        const action = txType === "deposit" ? "Deposit" : txType === "transfer" ? "Transfer" : "Pay";
+        //1. process the  action
+        const action = txType === "deposit" ? "Deposit" : 
+                       txType === "withdraw" ? "Withdraw" : 
+                       txType === "transfer" ? "Transfer" : 
+                       txType === "pay" ? "Pay" : '';
+
         const result = processTransaction(currentBalance, action, amount);
 
         if(!result.success){

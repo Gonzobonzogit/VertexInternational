@@ -10,7 +10,7 @@
   /* Backgrounds */ 
   --ctp-base:     #1e1e2e;
   --ctp-mantle:   #181825;
-<D-F3><F11>  --ctp-crust:    #11111b;
+  --ctp-crust:    #11111b;
   --ctp-surface0: #313244;
   --ctp-surface1: #45475a;
   --ctp-surface2: #585b70;
@@ -100,6 +100,76 @@ button {
 }
 
 
+/* ─DASHBOARD rules  ──────────────────────────────────────── */
+.dash {
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+
+.side-Bar-extras{
+    background: var(--ctp-surface0);
+    border: 1px solid var(--ctp-surface1);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    color: var(--ctp-text);
+    position: sticky;
+    top: 90px;
+}
+
+.panel-action {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: var(--ctp-surface1);
+    border: 1px solid var(--ctp-surface2);
+    border-radius: var(--radius-sm);
+    color: var(--ctp-subtext0);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.panel-action:hover {
+    background: var(--ctp-surface2);
+    color: var(--ctp-text);
+    border-color: var(--ctp-mauve);
+}
+
+.promo-card {
+    background: linear-gradient(135deg, var(--ctp-mauve), var(--ctp-blue));
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    color: var(--ctp-crust);
+    text-align: center;
+}
+
+.promo-card h4 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+.promo-card p { font-size: 0.8rem; margin-bottom: 1rem; opacity: 0.9; }
+
+.app4plus{
+    background: var(--ctp-crust);
+    color: var(--ctp-mauve);
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+}
+
+app4plus li {
+  list-style: none;
+}
+
+
 /* ── FOOTER ──────────────────────────────────────────────────── */
 footer {
   background:   var(--ctp-mantle);
@@ -118,6 +188,8 @@ footer small {
 footer small script {
   display: none;
 }
+
+
 
 
 /* ── SCROLLBAR (Webkit) ──────────────────────────────────────── */

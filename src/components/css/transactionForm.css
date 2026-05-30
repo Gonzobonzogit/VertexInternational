@@ -69,20 +69,20 @@
     gap: 1.5rem;
 }
 
-.formGroup {
+.form-group {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
 }
 
-.formGroup label {
+.form-group label {
     font-size: 0.85rem;
     color: var(--ctp-subtext0);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.form-group input, .formGroup select {
+.form-group input, .form-group select {
     padding: 12px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--ctp-surface1);

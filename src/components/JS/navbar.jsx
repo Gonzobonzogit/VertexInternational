@@ -44,7 +44,7 @@ const NavBar = ({ setPage }) => {
                     <span>Welcome back, <strong>King Gonzo</strong></span>
                 </div>
                 
-                <div className="profile-dropdown">
+                <div className="profile-drop">
                     <div 
                         className="profile-trigger" 
                         onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -58,7 +58,7 @@ const NavBar = ({ setPage }) => {
                     </div>
 
                     {isProfileOpen && (
-                        <ul className="dropdown">
+                        <ul className="drop-menu">
                             <li onClick={() => handleProfileAction('profile')}>My Profile</li>
                             <li onClick={() => handleProfileAction('accounts')}>My Accounts</li>
                             <li onClick={() => handleProfileAction('contact')}>Contact Us</li>

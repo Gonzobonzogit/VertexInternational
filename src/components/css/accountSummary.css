@@ -1,9 +1,16 @@
 
 /* ══════════════════════════════════════════════════════════════ */
-/* Vertex International — Account Summary Card Styling             */
+/*              Account Summary Card                               */
 /* ══════════════════════════════════════════════════════════════ */
 
-.accountCard {
+
+.account-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accnt-card {
     position: relative;
     background: var(--ctp-surface0);
     border: 1px solid var(--ctp-surface1);
@@ -19,18 +26,18 @@
     transition: transform 0.3s ease;
 }
 
-.accountCard:hover {
+.account-card:hover {
     transform: translateY(-5px);
 }
 
 /* Privacy Toggle - Top Right */
-.privacyControl {
+.privacy-control {
     position: absolute;
     top: 15px;
     right: 15px;
 }
 
-.privacyLabel {
+.privacy-label {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -40,24 +47,24 @@
     user-select: none;
 }
 
-.privateLabel input {
+.private-label input {
     cursor: pointer;
     accent-color: var(--ctp-mauve);
 }
 
-.toggleText {
+.toggle-text {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 /* Balance Display Area */
-.balanceShown {
+.balance-shown {
     margin: 2rem 0;
     flex-grow: 1;
 }
 
-.typeLabel {
+.type-label {
     font-size: 1rem;
     color: var(--ctp-mauve);
     text-transform: uppercase;
@@ -65,13 +72,13 @@
     margin-bottom: 0.5rem;
 }
 
-.accountCap {
+.accnt-cap {
     font-size: 1.1rem;
     color: var(--ctp-subtext1);
     margin-bottom: 1rem;
 }
 
-.dollarAmount {
+.dollar-amount {
     font-size: 3rem;
     font-weight: 800;
     font-family: var(--font-mono);
@@ -80,8 +87,10 @@
 }
 
 /* Bottom Switcher Buttons */
-.accountSwitcher {
+.switchbtns{
     display: flex;
+    flex-direction: row;
+    justify-content:space-between;
     gap: 10px;
     background: var(--ctp-crust);
     padding: 5px;
@@ -89,13 +98,7 @@
     border: 1px solid var(--ctp-surface1);
 }
 
-.switchBtn{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.debitBtn {
+.debit-btn {
     flex: 1;
     padding: 10px;
     margin-right:3px;
@@ -108,13 +111,13 @@
     cursor: pointer;
 }
 
-.debitBtn:hover{
+.debit-btn:hover{
     background-color: var(--ctp-sky);
     transform: translateY(-4);
     border: 1px solid var(--ctp-pink);
 }
 
-.creditBtn{
+.credit-btn{
    flex: 1;
    padding: 10px;
    margin: 0 50px 0 50px;
@@ -127,13 +130,13 @@
    cursor: pointer;
 }
 
-.creditBtn:hover{
+.credit-btn:hover{
     background-color: var(--ctp-lavender);
     transform: translateY(-4);
     border: 1px solid var(--ctp-yellow);
 }
 
-.savingsBtn{
+.savings-btn{
     flex: 1;
     padding:10px;
     margin-left: 3px;
@@ -146,19 +149,35 @@
     cursor: pointer;
 }
 
-.savingsBtn:hover{
+.savings-btn:hover{
     background-color: var(--ctp-teal);
     transform: translateY(-4);
     border: var(--ctp-green);
 }
+.history-toggle{
+    margin-top:1.5rem;
+    background: transparent;
+    border: 1px solid var(--ctp-surface1);
+    color: var(--ctp-subtext0);
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all 0.2s;
+}
 
-/*
-.switchBtn:hover {
+.history-toggle:hover {
     color: var(--ctp-text);
-}*/
-/*
-.switchBtn.active {
-    background: var(--ctp-mauve);
-    color: var(--ctp-crust);
-    box-shadow: 0 4px 12px rgba(203, 166, 247, 0.3);
-}*/
+    border-color: var(--ctp-mauve);
+}
+
+/* The container for the dropdown history */
+.drop-down {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 1rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+
+
+

@@ -16,7 +16,7 @@
 
 
 /*Outer Bar Container*/
-topBar {
+.top-bar {
   display:          flex;
   align-items:      center;
   justify-content:  space-between;
@@ -32,16 +32,16 @@ topBar {
 }
 
 
-/*Left side Branding**/
+/*Left side Branding*/
 
 /* Brand Styling */
-.navBrand {
+.nav-brand {
     flex: 1;
    display: flex;
     align-items: center;
 }
 
-.brandText {
+.brand-text {
     font-family: var(--font-sans);
     font-size: 1.4rem;
     font-weight: 800;
@@ -49,21 +49,22 @@ topBar {
     letter-spacing: -0.5px;
 }
 
-.brandHighlight {
+.brand-Hilite {
     color: var(--ctp-mauve);
     text-transform: uppercase;
     font-size: 1.1rem;
     margin-left: 4px;
 }
 
-/* Center Navigation */
-.navigation {
+/*Center*/
+
+.nav {
     flex: 2;
     display: flex;
     justify-content: center;
 }
 
-.siteNav {
+.nav-List {
     display: flex;
     list-style: none;
     gap: 2rem;
@@ -71,7 +72,7 @@ topBar {
     margin: 0;
 }
 
-.siteNav li a {
+.nav-List li a {
     color: var(--ctp-subtext0);
     text-decoration: none;
     font-weight: 500;
@@ -79,12 +80,12 @@ topBar {
     transition: color 0.2s ease;
 }
 
-.siteNav li a:hover {
+.nav-List li a:hover {
     color: var(--ctp-mauve);
 }
 
 /* User Section */
-.userSection {
+.user-section {
     flex: 1;
     display: flex;
     align-items: center;
@@ -92,21 +93,21 @@ topBar {
     gap: 1.5rem;
 }
 
-.userGreeting {
+.user-greeting{
     font-size: 0.9rem;
     color: var(--ctp-subtext1);
 }
 
-.userGreeting strong {
+.user-greeting strong {
     color: var(--ctp-text);
 }
 
 /* Custom Dropdown */
-.profileDropdown {
+.profile-drop {
     position: relative;
 }
 
-.profileTrigger {
+.profile-trigger {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -116,11 +117,11 @@ topBar {
     transition: background 0.2s;
 }
 
-.profileTrigger:hover {
+.profile-trigger:hover {
     background: var(--ctp-surface0);
 }
 
-.profilePic {
+.pfp {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -128,12 +129,12 @@ topBar {
     background: var(--ctp-surface2);
 }
 
-.dropdownArrow {
+.Arrow {
     font-size: 0.7rem;
     color: var(--ctp-overlay0);
 }
 
-.dropdownMenu {
+.drop-menu {
     position: absolute;
     top: 50px;
     right: 0;
@@ -147,7 +148,7 @@ topBar {
     animation: slideDown 0.2s ease-out;
 }
 
-.dropdownMenu li {
+.drop-menu li {
     padding: 10px 16px;
     color: var(--ctp-text);
     font-size: 0.9rem;
@@ -155,22 +156,22 @@ topBar {
     transition: background 0.2s;
 }
 
-.dropdownMenu li:hover {
+.drop-menu li:hover {
     background-color: var(--ctp-surface2);
     color: var(--ctp-mauve);
 }
 
-.dropdownDivider {
+.drop-Div {
     border: 0;
     border-top: 1px solid var(--ctp-surface1);
     margin: 4px 0;
 }
 
-.signOut {
+.sign-out {
     color: var(--ctp-red) !important;
 }
 
-.signOut:hover {
+.sign-out:hover {
     background-color: rgba(243, 139, 168, 0.1) !important;
 }
 

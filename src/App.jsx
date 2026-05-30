@@ -45,7 +45,7 @@ const App = () => {
             <div className="dash">
 
                 {/*Left side bar start*/}
-                <aside className="side-Bar extras">
+                <aside className="side-Bar-extras">
                     <div className="extra-actions">
                         <h3>Control Panel</h3>
                         <button className="panel-action">Freeze Card/New Card</button>
@@ -91,7 +91,7 @@ const App = () => {
                 {/*Main section end*/}
 
                 {/*Right side bar start*/}
-                <aside className={`side-Bar right ${currentPage  === 'accounts'} ? 'hidden' : 'null`}>
+                <aside className={`side-Bar right ${currentPage === 'accounts' ? 'hidden' : ''}`}>
                     <div className="feed-container">
                         <h3>Transaction Feed</h3>
                         <TransactionHistory transactions={transactions} layout="feed" />
