@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../css/navbar.css';
 
-function NavBar() {
+
+const NavBar = ({ setPage }) => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     const handleProfileAction = (action) => {
@@ -16,17 +17,21 @@ function NavBar() {
         <header className="topBar">
             {/* Left: Branding */}
             <div className="navBrand">
-                <span className="brandText">Vertex <span className="brandHighlight">International</span></span>
+                <span className="brandText">
+                    Vertex 
+                    <span className="brandHighlight">
+                        International
+                    </span>
+                </span>
             </div>
 
             {/* Center: Navigation Links */}
             <nav className="navigation">
                 <ul className="siteNav">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#accounts">Accounts</a></li>
-                    <li><a href="#transfer">Transfer</a></li>
-                    <li><a href="#wallets">Wallets</a></li>
-                    <li><a href="#settings">Settings</a></li>
+                    <li><button className="navLink" onClick={() => setPage('accounts')}>Accounts</button></li>
+                    <li><button className="navLink" onClick={() => setPage('transfers')}>Transfers</button></li>
+                    <li><button className="navLink" onClick={() => alert('Wallets coming soon!')}>Wallets</button></li>
+                    <li><button className="navLink" onClick={() => alert("Settings are in the works")}>Settings</button></li>
                 </ul>
             </nav>
 

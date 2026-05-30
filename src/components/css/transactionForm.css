@@ -1,172 +1,110 @@
 /* transactionForm.css */
 
 /* ── Card shell ───────────────────────────────────────────────── */
-.transactionCard {
-    background:    var(--ctp-surface0);
-    border:        0.5px solid var(--ctp-surface1);
+
+.tx-card {
+    background: var(--ctp-surface0);
+    border: 1px solid var(--ctp-surface1);
     border-radius: var(--radius-lg);
-    padding:       1.5rem;
-    display:       flex;
-    flex-direction: column;
-    gap:           1rem;
-    min-width:     260px;
-    flex:          1;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: var(--ctp-text);
 }
 
 /* ── Header: name + balance ───────────────────────────────────── */
-.txCardHeader {
-    display:         flex;
-    justify-content: space-between;
-    align-items:     baseline;
-}
-
-.txAccountName {
-    font-size:   13px;
-    color:       var(--ctp-subtext0);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.txBalance {
-    font-size:   22px;
-    font-weight: 500;
-    color:       var(--ctp-text);
-}
-
-/* ── Action buttons ───────────────────────────────────────────── */
-.txActions {
+.tx-header {
     display: flex;
-    gap:     8px;
-    flex-wrap: wrap;
-}
-
-.txBtn {
-    padding:       6px 14px;
-    border-radius: var(--radius-pill);
-    border:        0.5px solid var(--ctp-surface2);
-    background:    var(--ctp-surface1);
-    color:         var(--ctp-subtext1);
-    font-size:     13px;
-    transition:    background 0.18s, color 0.18s, border-color 0.18s;
-}
-
-.txBtn:hover {
-    background: var(--ctp-surface2);
-    color:      var(--ctp-text);
-}
-
-/* Active state inherits debit/credit color */
-.txBtn--active.txBtn--debit {
-    background:   var(--ctp-red);
-    border-color: var(--ctp-red);
-    color:        var(--ctp-base);
-}
-
-.txBtn--active.txBtn--credit {
-    background:   var(--ctp-green);
-    border-color: var(--ctp-green);
-    color:        var(--ctp-base);
-}
-
-/* ── Collapsible input panel ──────────────────────────────────── */
-.txInputPanel {
-    display:        flex;
-    flex-direction: column;
-    gap:            8px;
-    max-height:     0;
-    overflow:       hidden;
-    transition:     max-height 0.3s ease, opacity 0.3s ease;
-    opacity:        0;
-}
-
-.txInputPanel--open {
-    max-height: 120px;
-    opacity:    1;
-}
-
-/* ── Label ────────────────────────────────────────────────────── */
-.txLabel {
-    font-size: 12px;
-    letter-spacing: 0.03em;
-}
-
-.txLabel--debit  { color: var(--ctp-red);   }
-.txLabel--credit { color: var(--ctp-green); }
-
-/* ── Input row ────────────────────────────────────────────────── */
-.txInputRow {
-    display:     flex;
+    justify-content: space-between;
     align-items: center;
-    gap:         8px;
-    background:  var(--ctp-mantle);
-    border:      0.5px solid var(--ctp-surface2);
-    border-radius: var(--radius-md);
-    padding:     6px 10px;
-    transition:  border-color 0.18s;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ctp-surface1);
+}
+.source-balance {
+    font-size: 2rem;
+    color: var(--ctp-mauve);
+    margin: 0;
 }
 
-.txInputRow:focus-within {
-    border-color: var(--ctp-mauve);
-}
-
-.txCurrencySymbol {
-    color:     var(--ctp-overlay0);
-    font-size: 14px;
-}
-
-.txInput {
-    flex:        1;
-    background:  transparent;
-    border:      none;
-    outline:     none;
-    color:       var(--ctp-text);
-    font-size:   15px;
-    font-family: var(--font-sans);
-}
-
-.txInput--debit::placeholder  { color: var(--ctp-red);   opacity: 0.5; }
-.txInput--credit::placeholder { color: var(--ctp-green); opacity: 0.5; }
-
-/* Hide number input arrows */
-.txInput::-webkit-outer-spin-button,
-.txInput::-webkit-inner-spin-button { -webkit-appearance: none; }
-.txInput[type=number]               { -moz-appearance: textfield; }
-
-/* ── Confirm button ───────────────────────────────────────────── */
-.txConfirm {
-    padding:       5px 14px;
-    border-radius: var(--radius-pill);
-    border:        none;
-    font-size:     12px;
-    font-weight:   500;
-    transition:    background 0.18s, transform 0.1s;
-}
-
-.txConfirm:active { transform: scale(0.97); }
-
-.txConfirm--debit {
-    background: var(--ctp-red);
-    color:      var(--ctp-base);
-}
-
-.txConfirm--credit {
-    background: var(--ctp-green);
-    color:      var(--ctp-base);
-}
-
-/* ── Feedback message ─────────────────────────────────────────── */
-.txFeedback {
-    font-size:  12px;
-    padding:    6px 10px;
+.pick-acct {
+    background: var(--ctp-surface2);
+    color: var(--ctp-text);
+    border: 1px solid var(--ctp-surface1);
+    padding: 5px 10px;
     border-radius: var(--radius-sm);
+    cursor: pointer;
 }
 
-.txFeedback--success {
-    background: rgba(166, 227, 161, 0.12);
-    color:      var(--ctp-green);
+.txType-toggle {
+    display: flex;
+    gap: 10px;
+    background: var(--ctp-crust);
+    padding: 5px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 2rem;
 }
 
-.txFeedback--error {
-    background: rgba(243, 139, 168, 0.12);
-    color:      var(--ctp-red);
+.txType-toggle button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--ctp-subtext0);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.txType-toggle button.active {
+    background: var(--ctp-mauve);
+    color: var(--ctp-crust);
+}
+
+.form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.formGroup label {
+    font-size: 0.85rem;
+    color: var(--ctp-subtext0);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input, .formGroup select {
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--ctp-surface1);
+    background: var(--ctp-surface2);
+    color: var(--ctp-text);
+    font-size: 1rem;
+}
+
+.exec-Btn {
+    margin-top: 1rem;
+    padding: 15px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--ctp-mauve);
+    color: var(--ctp-crust);
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.exec-Btn:hover {
+    transform: scale(1.02);
+    background: var(--ctp-lavender);
 }

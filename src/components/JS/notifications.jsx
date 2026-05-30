@@ -1,9 +1,9 @@
 //Contains function that will handle in app notifications
 
 
-const Notifications = ({ notification, onDismiss }) => {
+const Notifications = ({ notifications, onDismiss }) => {
   const successColors = { success: "#50fa7b", error: "#ff5555" };
-  const color = successColors[notification.type];
+  const color = successColors[notifications.type];
 
   return (
     <div style={{
@@ -16,7 +16,7 @@ const Notifications = ({ notification, onDismiss }) => {
           justifyContent: "space-between",
           alignItems: "center",
     }}>
-        <span>{notification.message}</span>
+        <span>{notifications.message}</span>
         <button
             onClick={onDismiss}
             style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.2rem" }}

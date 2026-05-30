@@ -7,11 +7,17 @@ import Notifications from './components/JS/notifications.jsx';
 import './style.css';
 
 const App = () => {
+
+    //Nav state setter
+    const [currentPage, setCurrentPage] = useState('accounts'); //or can pass 'transactions' 
+
+
+    //setters and vars for acconts and transactions
     const [showDetails, setShowDetails] = useState(true);
     const [notifications, setNotifications] = useState(null);
-    const [debitBalance, setDebitBalance] = useState(0);
-    const [creditBalance, setCreditBalance] = useState(0);
-    const [savingsBalance, setSavingsBalance] = useState(0);
+    const [debitBalance, setDebitBalance] = useState(169420);
+    const [creditBalance, setCreditBalance] = useState(6969);
+    const [savingsBalance, setSavingsBalance] = useState(42069);
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
@@ -24,7 +30,7 @@ const App = () => {
         <div className="outerContainer">
             {/* Cleaned up: Navbar now handles the branding and greeting */}
             <div className="navContainer">
-                <NavBar />
+                <NavBar setPage={setCurrentPage} />
             </div>
 
             <div className="notifCont">
@@ -37,17 +43,22 @@ const App = () => {
             </div>
 
             <div className="mainInput">
-                <Account
-                    balances={{debitBalance, creditBalance, savingsBalance}}
-                    showDetails={showDetails}
-                    setShowDetails={setShowDetails}
-                />
-                <Transaction
-                    balances={{debitBalance, creditBalance, savingsBalance}}
-                    setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
-                    setTransactions={setTransactions}
-                    setNotifications={setNotifications}
-                />
+
+                {/*Splitting the accounts summary and transactions*/}
+                {currentPage === 'accounts' ? (
+                    <Account
+                        balances={{debitBalance, creditBalance, savingsBalance}}
+                        showDetails={showDetails}
+                        setShowDetails={setShowDetails}
+                   />
+                ):( <Transaction
+                        balances={{debitBalance, creditBalance, savingsBalance}}
+                        setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
+                        setTransactions={setTransactions}
+                        setNotifications={setNotifications}
+                    />
+                  )}
+
                 <TransactionHistory transactions={transactions} />
             </div>
         </div>

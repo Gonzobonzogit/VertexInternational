@@ -18,14 +18,14 @@ const TransactionHistory = ({ transactions}) => {
                 >
                   <div className="historyTop">
                     <span className="tx-type">
-                      {tx.type === "Deposit" ? `${tx.depositType?.toUpperCase()} Deposit` : `${tx.transferType} Transfer to ${tx.beneficiaryName}`}
+                      {tx.type === "Deposit" ? `${tx.transferType?.toUpperCase()} Deposit` : `${tx.type} to ${tx.recipient ?? "External"}`}
                     </span>
                     <span className="tx-amount">
                       {tx.type === "Deposit" ? "+" : "-"}${tx.amount.toFixed(2)}
                     </span>
                   </div>
                   <div className="history-bottom">
-                    <span className="tx.account">{tx.account}</span>
+                    <span className="tx-account">{tx.account}</span>
                     <span className="tx-balance">${tx.balanceAfter.toLocaleString()}</span>
                     <span className="tx-time">{tx.timestamp}</span>
                   </div>

@@ -1,176 +1,161 @@
 //Forms for different Transactions
 import { useState } from 'react';
 import { AccountFacts, processTransaction } from '../../services/AccountData.js';
-import Notifications from './notifications.jsx';
 import '../css/transactionForm.css';
 
 
 const Transactions = ({ balances, setters, setTransactions, setNotifications }) => {
+    //setting the account to activate
     const [activeAccount, setActiveAccount] = useState("debit");
+    
+    //Transaction (tx) type
+    const [txType, setTxType] = useState("deposit"); //deposit is the default Tx
 
-    //Deposit State
-    const [depositAmount, setDepositAmount] = useState("");
+    //Form states &  state setters
+    const [amount, setAmount] = useState("");
     const [depositType, setDepositType] = useState("cash");
+    const [recipient, setRecipient] = useState("");
+    const [targetAcct, setTargetAcct] = useState('savings');//internal tx
+    const [notes, setNotes] = useState("");
 
-    //transfer state
-    const [transferForm, setTransferForm] = useState({
-        beneficiaryAccount: "",
-        beneficiaryName: "",
-        transferType: "SWIFT",
-        amount: "",
-        notes: "",
-    });
+    const currentBalance = balances[activeAccount + "Balance"];
+    const setter  = setters["set" + activeAccount.charAt(0).toUpperCase() + activeAccount.slice(1) + "Balance"];
 
-    //dynamic keys
-    const currentBalanceKey = activeAccount + "Balance";
-    const setterKey = "set" + activeAccount.charAt(0).toUpperCase() + activeAccount.slice(1) + "Balance";
-
-    const depositHandler = () => {
-        const result = processTransaction(balances[currentBalanceKey], "Deposit",
-                                          depositAmount);
-        if (!result.success) {
-            setNotifications({ type: "error", message: result.msg });
+    const handleExec = () => {
+        if(!amount || parseFloat(amount) <= 0){
+            setNotifications({ type: 'error', message: 'Please enter a valid amount.' });
             return;
         }
-        setters[setterKey](result.newBalance);
+
+        //1. process the withdraw action
+        const action = txType === "deposit" ? "Deposit" : txType === "transfer" ? "Transfer" : "Pay";
+        const result = processTransaction(currentBalance, action, amount);
+
+        if(!result.success){
+            setNotifications({ type: 'error', message: result.msg });
+            return;
+        }
+
+        //2.update the source account
+        setter(result.newBalance);
+
+        //3.Internal Transfer handler
+        if(txType === 'transfer' && targetAcct !== 'external'){
+            const targetSetter = setters['set' + targetAcct.charAt(0).toUpperCase() + targetAcct.slice(1) + "Balance"];
+            targetSetter(prev => prev + parseFloat(amount));
+        }
+
+        //4.log transaction
         setTransactions(prev => [{
-            id: Date.now(),
-            type: "deposit",
-            depositType,
-            amount: parseFloat(depositAmount),
-            account: AccountFacts[activeAccount].name,
-            timestamp: new Date().toLocaleString(),
-            balanceAfter: result.newBalance,
-        }, ...prev]);
-        setDepositAmount("");
+                  id: Date.now(),
+                  type: txType === "deposit" ? "Deposit" : txType,
+                  transferType: txType === "deposit" ? depositType : null,
+                  amount: parseFloat(amount),
+                  account: AccountFacts[activeAccount].name,
+                  recipient: txType === "pay" ? recipient : (txType === "transfer" ? (targetAcct === "external" ? recipient: AccountFacts[targetAcct].name): null),
+                  notes: notes,
+                  timestamp: new Date().toLocaleString(),
+                  balanceAfter: result.newBalance,
+          }, ...prev]);
+
+        setNotifications({ type: "success", message: `${txType.toUpperCase()} in amount of $${amount} was successful! `});
+
+        //reset form
+        setAmount("");
+        setRecipient("");
+        setNotes("");
+
     };
 
+    return (
+       <div className="tx-card">
+            <div className="tx-header">
+                <div className="sourceAcct-info">
+                    <span>Funding from: <strong>{AccountFacts[activeAccount].name}</strong></span>
+                    <h2 className="source-balance">${currentBalance.toLocaleString()}</h2>
+                </div>
+                <select className="pick-acct" value={activeAccount} onChange={(e) => setActiveAccount(e.target.value)}>
+                    <option value="debit">Debit</option>
+                    <option value="savings">Savings</option>
+                    <option value="credit">Credit</option>
+                </select>
+            </div>
 
-  const transferHandler = () => {
-          // processTransaction returns a result object — check it with a normal if block
-          const result = processTransaction(balances[currentBalanceKey], "Transfer",
-  transferForm.amount);
-          if (!result.success) {
-              alert(result.msg);
-              return;
-          }
-          setters[setterKey](result.newBalance);
-          setTransactions(prev => [{
-              id: Date.now(),
-              type: "transfer",
-              transferType: transferForm.transferType.toUpperCase(),
-              amount: parseFloat(transferForm.amount),
-              beneficiaryAccount: transferForm.beneficiaryAccount,
-              beneficiaryName: transferForm.beneficiaryName,
-              notes: transferForm.notes,
-              account: AccountFacts[activeAccount].name,
-              timestamp: new Date().toLocaleString(),
-              balanceAfter: result.newBalance,
-          }, ...prev]);
-          setNotifications({ type: "success", message: `Transfer of $${parseFloat(transferForm.amount).toFixed(2)} successful!` });
-          setTransferForm({ beneficiaryAccount: "", beneficiaryName: "", transferType:
-  "SWIFT", amount: "", notes: "" });
-      };
+            <div className="txType-toggle">
+                <button className={txType === 'deposit' ? 'active' : ''} onClick={() => setTxType('deposit')}>Deposit</button>
 
-return (
-          <div className="transactionContainer">
+                <button className={txType === "transfer" ? "active" : ''} onClick={() => setTxType('transfer')} >Transfer</button>
 
-              <div className="typeSelect">
-                  <button onClick={() => setActiveAccount("debit")}>Debit</button>
-                  <button onClick={() => setActiveAccount("savings")}>Savings</button>
-                  <button onClick={() => setActiveAccount("credit")}>Credit</button>
-              </div>
+                <button className={txType === "pay" ? "active" : ''} onClick={() => setTxType('pay')}>Pay</button>
+            </div>
 
-              {activeAccount && (
-                  <div className="dynamicCard">
-                      <h3>{AccountFacts[activeAccount].name}</h3>
-                      <h2>${balances[currentBalanceKey].toLocaleString()}</h2>
-                  </div>
-              )}
+            <div className="form-body">
+                {/*Deposit form*/}
+                {txType === 'deposit' && (
+                <div className="form-group">
+                        <label>Deposit Method</label>
+                        <select value={depositType} onChange={(e) => setDepositType(e.target.value)}>
+                            <option value="cash">Cash</option>
+                            <option value="check">Check</option>
+                        </select>
+                        <label>Amount to Deposit</label>
+                        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="-.--" />
+                    </div>
+                )}
+            </div>
 
-              <div className="DepositForm-container">
-                  <div className="form-group">
-                      <label>Deposit Type</label>
-                      <select value={depositType} onChange={(e) =>
-  setDepositType(e.target.value)}>
-                          <option value="cash">Cash</option>
-                          <option value="check">Check</option>
-                      </select>
-                  </div>
-                  <div className="form-group">
-                      <label>Amount</label>
-                      <input
-                          type="number"
-                          value={depositAmount}
-                          onChange={(e) => setDepositAmount(e.target.value)}
-                          placeholder="Enter amount"
-                      />
-                  </div>
-                  <button onClick={depositHandler}>Deposit</button>
-              </div>
+             {/*Transfer form*/}
+                {txType === 'transfer' && (
+                    <div className="form-group">
+                        <label>Destination</label>
+                        <select value={targetAcct} onChange={(e) => setTargetAcct(e.target.value)}>
+                            <option value="savings">My Savings</option>
+                            <option value="debit">My Debit</option>
+                            <option value="credit">My Credit</option>
+                            <option value="external">External Account</option>
+                        </select>
+                        {targetAcct === 'external' && (
+                            <input type="text" placeholder="Recipient Account #" value={recipient} onChange={(e) => setRecipient(e.target.value)} />
+                        )}
+                        <label>Amount to Transfer</label>
+                        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" />
+                    </div>
+                )}         
 
-              <div className="transferFormContainer">
-                  <div className="form-group2">
-                      <label>Beneficiary Account</label>
-                      <input
-                          type="text"
-                          placeholder="Account number"
-                          value={transferForm.beneficiaryAccount}
-                          onChange={(e) => setTransferForm(prev => ({ ...prev,
-  beneficiaryAccount: e.target.value }))}
-                      />
-                  </div>
-                  <div className="form-group2">
-                      <label>Beneficiary Name</label>
-                      <input
-                          type="text"
-                          placeholder="Recipient name"
-                          value={transferForm.beneficiaryName}
-                          onChange={(e) => setTransferForm(prev => ({ ...prev,
-  beneficiaryName: e.target.value }))}
-                      />
-                  </div>
-                  <div className="form-group2">
-                      <label>Transfer Type</label>
-                      <select
-                          value={transferForm.transferType}
-                          onChange={(e) => setTransferForm(prev => ({ ...prev, transferType:
-   e.target.value }))}
-                      >
-                          <option value="ach">ACH</option>
-                          <option value="wire">WIRE</option>
-                          <option value="swift">SWIFT</option>
-                      </select>
-                  </div>
-                  <div className="form-group2">
-                      <label>Amount</label>
-                      <input
-                          type="number"
-                          placeholder="Enter amount"
-                          value={transferForm.amount}
-                          onChange={(e) => setTransferForm(prev => ({ ...prev, amount:
-  e.target.value }))}
-                      />
-                  </div>
-                  <div className="form-group2">
-                      <label>Notes</label>
-                      <input
-                          type="text"
-                          placeholder="What's this for?"
-                          value={transferForm.notes}
-                          onChange={(e) => setTransferForm(prev => ({ ...prev, notes:
-  e.target.value }))}
-                      />
-                  </div>
-                  <div className="transfer-button">
-                      <button onClick={transferHandler}>Transfer</button>
-                  </div>
-              </div>
 
-          </div>
-      );
-  }
 
-  export default Transactions;
+            {/* PAY FORM */}
+                {txType === 'pay' && (
+                    <div className="form-group">
+                       <label>Recipient (Username/Email)</label>
+                        <input type="text" value={recipient} onChange={(e) => setRecipient(e.target.value)} placeholder="@username" />
+                        <label>Amount to Pay</label>
+                        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" />
+                        <label>Note</label>
+                        <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="What is this for?" />
+                    </div>
+                )}
+            
+                <button className="exec-Btn" onClick={handleExec}>
+                    Confirm {txType.charAt(0).toUpperCase() + txType.slice(1)}
+                </button>
+            </div>
+        
+    );
+}
+
+export default Transactions;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
