@@ -37,7 +37,7 @@ topBar {
 /* Brand Styling */
 .navBrand {
     flex: 1;
-    display: flex;
+   display: flex;
     align-items: center;
 }
 

@@ -41,25 +41,62 @@ const App = () => {
                     />
                  )}
             </div>
+            {/*Dashboard start*/}
+            <div className="dash">
 
-            <div className="mainInput">
+                {/*Left side bar start*/}
+                <aside className="side-Bar extras">
+                    <div className="extra-actions">
+                        <h3>Control Panel</h3>
+                        <button className="panel-action">Freeze Card/New Card</button>
+                        <button className="panel-action">Account Statement</button>
+                        <button className="panel-action">Bills</button>
+                        <button className="panel-action">24/7 Support</button>
+                    </div>
+                    <div className="side-Bar promo">
+                        <div className="promo-card">
+                            <h4>Vertex Plus</h4>
+                            <h5>Plus members benifets include:</h5>
+                            <ul>
+                                <li>Get Direct desposit early!</li>
+                                <li>Earn 5% cash back on any credit purchase</li>
+                                <li>Access to payNow®</li>
+                                <li>$20 in overdraft coverage</li>                                
+                            </ul>
+                            <button className="app4plus">Apply</button>
+                        </div>
+                    </div>
+                </aside>
+                {/*Left side bar end*/}
 
-                {/*Splitting the accounts summary and transactions*/}
-                {currentPage === 'accounts' ? (
-                    <Account
-                        balances={{debitBalance, creditBalance, savingsBalance}}
-                        showDetails={showDetails}
-                        setShowDetails={setShowDetails}
-                   />
-                ):( <Transaction
-                        balances={{debitBalance, creditBalance, savingsBalance}}
-                        setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
-                        setTransactions={setTransactions}
-                        setNotifications={setNotifications}
-                    />
-                  )}
+                {/*Main section start*/}
+                <main className="main-input">
+                    {/*Splitting the accounts summary and transactions actions*/}
+                    {currentPage === 'accounts' ? (
+                        <Account
+                            balances={{debitBalance, creditBalance, savingsBalance}}
+                            showDetails={showDetails}
+                            setShowDetails={setShowDetails}
+                            transactions={transactions}           />
+                    ):( <Transaction
+                            balances={{debitBalance, creditBalance, savingsBalance}}
+                            setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
+                            setTransactions={setTransactions}
+                            setNotifications={setNotifications}
+                        />
+                    )}
 
-                <TransactionHistory transactions={transactions} />
+                    <TransactionHistory transactions={transactions} />
+                </main>
+                {/*Main section end*/}
+
+                {/*Right side bar start*/}
+                <aside className={`side-Bar right ${currentPage  === 'accounts'} ? 'hidden' : 'null`}>
+                    <div className="feed-container">
+                        <h3>Transaction Feed</h3>
+                        <TransactionHistory transactions={transactions} layout="feed" />
+                    </div>
+                </aside>
             </div>
         </div>
     );
