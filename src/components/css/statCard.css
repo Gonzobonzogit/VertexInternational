@@ -1,0 +1,120 @@
+/*------------------------------------------------------------------------
+*                         Stat Card
+*                         
+*-------------------------------------------------------------------------
+* */
+
+
+.stats{
+  background: var(--ctp-surface);
+  border: 1px solid var(--ctp-surface1);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: var(--ctp-text);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.stats h3 {
+  color: var(--ctp-mauve);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-section{
+  margin-bottom: 1.8rem;
+}
+
+.stat-section label{
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ctp-subtext0);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.spent{
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: car(--ctp-pink);
+}
+
+.total-income{
+ font-size: 1.2rem;
+  font-weight: 600;
+  color: car(--ctp-green);
+  margin-bottom: 0.8rem;
+}
+
+.income-deets{
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  padding: 8px 0;
+  border-top: 1px solid var(--ctp-surface1);
+}
+
+.employeer{
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+.pay-date{
+  color: var(--ctp-overlay0);
+}
+
+.acct-paid{
+  color: var(--ctp-sky);
+}
+
+.income-amt{
+  font-weight: 600;
+}
+
+.bill-amt{
+  font-size: 1.4rem;
+  color: var(--ctp-peach);
+  font-weight: 600;
+}
+
+/*Score bar */
+
+.stat-score{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cred-score{
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ctp-mauve);
+}
+
+.score-bar-bg{
+  height: 12px;
+  background: var(--ctp-crust);
+  border-radius: var(--radius-pill);
+  margin: 9px 0;
+  overflow: hidden;
+}
+
+
+.score-bar-fill{
+  height: 100%;
+  background: linear-gradient(to right, var(--ctp-blue), var(--ctp-mauve));
+  border-radius: var(--radius-pill);
+}
+
+.stats small{
+  font-size: 0.7rem;
+  color: var(--ctp-overlay0);
+}
+
+@keyframes fadeIn{
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}

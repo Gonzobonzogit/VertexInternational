@@ -1,10 +1,9 @@
 //This module will hold the ui information for the users account
 import { useState } from 'react';
-import { AccountFacts } from "../../services/AccountData.js";
 import TransactionHistory from "./transactionHistory.jsx";
 import '../css/accountSummary.css';
 
-const AccountSummary = ({ balances, showDetails, setShowDetails, transitions }) => {
+const AccountSummary = ({ balances, showDetails, setShowDetails, transactions }) => {
     //Sets the defualt account viewed at home screen
     const [activeAccount, setActiveAccount] = useState("debit");
     //sets up live history feed
@@ -88,7 +87,7 @@ const AccountSummary = ({ balances, showDetails, setShowDetails, transitions }) 
                 {/*Drop down*/}
                 {showHistory && (
                   <div className="drop-down">
-                        <TransactionHistory transitions={transitions} layout="dropdown" />
+                        <TransactionHistory transactions={transactions} layout="dropdown" />
                   </div>  
                 )}
             </div>

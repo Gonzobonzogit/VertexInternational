@@ -20,8 +20,8 @@
   display:          flex;
   align-items:      center;
   justify-content:  space-between;
-  padding:          0 2rem;
-  height:           70px;
+  padding:          0 30px;
+  height:           140px;
   background:       var(--ctp-mantle);
   border-bottom:    1px solid var(--ctp-surface1);
   position:         sticky;
@@ -32,21 +32,35 @@
 }
 
 
-/*Left side Branding*/
-
 /* Brand Styling */
-.nav-brand {
-    flex: 1;
-   display: flex;
+
+.logo-container{
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-decoration: none;
 }
 
-.brand-text {
-    font-family: var(--font-sans);
-    font-size: 1.4rem;
-    font-weight: 800;
+
+.companyLogo{
+    height: 100px;
+    width: auto;
+}
+
+.company-name{
+    display: flex;
+    flex-direction: row;
     color: var(--ctp-text);
-    letter-spacing: -0.5px;
+    font-size: 1rm;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 .brand-Hilite {
@@ -59,47 +73,78 @@
 /*Center*/
 
 .nav {
-    flex: 2;
+    flex: 1;
+    align-self: stretch;
     display: flex;
-    justify-content: center;
+    align-items: flex-end;
 }
 
 .nav-List {
+    width: 100%;
+    height: 100%;
     display: flex;
+    align-items: flex-end;
     list-style: none;
-    gap: 2rem;
     padding: 0;
     margin: 0;
 }
 
-.nav-List li a {
-    color: var(--ctp-subtext0);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
+.nav-List li {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
 }
 
-.nav-List li a:hover {
-    color: var(--ctp-mauve);
+.nav-Link {
+    width: 100%;
+    height: 44px;
+    padding: 0 8px;
+    border-top: 1px solid var(--ctp-surface1);
+    border-left: 1px solid rgba(255, 255, 255, 0.04);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(to bottom, var(--ctp-surface1) 0%, var(--ctp-surface0) 100%);
+    color: var(--ctp-subtext);
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    box-shadow:
+        0 -4px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    transition:
+        background 0.12s ease,
+        box-shadow 0.12s ease,
+        transform 0.1s ease,
+        color 0.12s ease;
 }
+
+.nav-Link:hover {
+    background: var(--ctp-mantle);
+    color: var(--ctp-mauve);
+    box-shadow:
+        inset 0 6px 14px rgba(0, 0, 0, 0.65),
+        inset 3px 0 8px rgba(0, 0, 0, 0.25),
+        inset -3px 0 8px rgba(0, 0, 0, 0.25);
+}
+
+.nav-Link:active {
+    background: var(--ctp-mantle);
+    color: var(--ctp-mauve);
+    box-shadow:
+        inset 0 8px 18px rgba(0, 0, 0, 0.75),
+        inset 4px 0 10px rgba(0, 0, 0, 0.3),
+        inset -4px 0 10px rgba(0, 0, 0, 0.3);
+}
+
 
 /* User Section */
 .user-section {
-    flex: 1;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 1.5rem;
-}
-
-.user-greeting{
-    font-size: 0.9rem;
-    color: var(--ctp-subtext1);
-}
-
-.user-greeting strong {
-    color: var(--ctp-text);
 }
 
 /* Custom Dropdown */
@@ -129,26 +174,40 @@
     background: var(--ctp-surface2);
 }
 
-.Arrow {
-    font-size: 0.7rem;
-    color: var(--ctp-overlay0);
-}
 
 .drop-menu {
     position: absolute;
     top: 50px;
     right: 0;
-    width: 180px;
+    width: 210px;
     background-color: var(--ctp-surface0);
     border: 1px solid var(--ctp-surface1);
     border-radius: var(--radius-md);
     list-style: none;
-    padding: 8px 0;
+    padding: 0;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     animation: slideDown 0.2s ease-out;
+    overflow: hidden;
 }
 
-.drop-menu li {
+.drop-greeting {
+    padding: 14px 16px 10px;
+    font-size: 0.82rem;
+    color: var(--ctp-subtext) !important;
+    cursor: default !important;
+    pointer-events: none;
+    background: var(--ctp-mantle);
+    line-height: 1.4;
+}
+
+.drop-greeting strong {
+    display: block;
+    color: var(--ctp-mauve) !important;
+    font-size: 1rem;
+    margin-top: 2px;
+}
+
+.drop-menu li:not(.drop-greeting) {
     padding: 10px 16px;
     color: var(--ctp-text);
     font-size: 0.9rem;
@@ -156,8 +215,8 @@
     transition: background 0.2s;
 }
 
-.drop-menu li:hover {
-    background-color: var(--ctp-surface2);
+.drop-menu li:not(.drop-greeting):hover {
+    background-color: var(--ctp-surface1);
     color: var(--ctp-mauve);
 }
 

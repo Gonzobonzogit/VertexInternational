@@ -17,15 +17,12 @@ const NavBar = ({ setPage }) => {
         <header className="top-bar">
             {/* Left: Branding */}
             <div className="nav-brand">
-                <span className="logo">
-                    <img src={companyLogo} alt="company logo" />
-                </span>
-                <span className="brand-text">
-                    Vertex 
-                    <span className="brand-hilite">
-                        International
-                    </span>
-                </span>
+                <div className="logo-container">      
+                    <span className="logo">
+                        <img src={companyLogo} alt="company logo" className="companyLogo" />
+                    </span> 
+                    <span className="company-name"><strong>Vertex</strong>  International </span>
+                </div>
             </div>
 
             {/* Center: Navigation Links */}
@@ -40,25 +37,23 @@ const NavBar = ({ setPage }) => {
 
             {/* Right: User Profile Section */}
             <div className="user-section">
-                <div className="user-greeting">
-                    <span>Welcome back, <strong>King Gonzo</strong></span>
-                </div>
-                
                 <div className="profile-drop">
-                    <div 
-                        className="profile-trigger" 
-                        onClick={() => setIsProfileOpen(!isProfileOpen)}
+                    <div className="profile-trigger"
+                         onClick={() => setIsProfileOpen(!isProfileOpen)}
                     >
-                        <img 
-                            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Gonzo" 
-                            alt="User Profile" 
-                            className="pfp" 
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Gonzo"
+                             alt="User Profile"
+                             className="pfp"
                         />
-                        <span className="Arrow">{isProfileOpen ? '▲' : '▼'}</span>
                     </div>
 
                     {isProfileOpen && (
                         <ul className="drop-menu">
+                            <li className="drop-greeting">
+                                Welcome back,
+                                <strong>King Gonzo</strong>
+                            </li>
+                            <hr className="drop-Div" />
                             <li onClick={() => handleProfileAction('profile')}>My Profile</li>
                             <li onClick={() => handleProfileAction('accounts')}>My Accounts</li>
                             <li onClick={() => handleProfileAction('contact')}>Contact Us</li>

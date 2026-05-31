@@ -1,17 +1,18 @@
 import {useState, useEffect} from 'react';
 import NavBar from './components/JS/navbar.jsx';
-import Account from './components/JS/accountSummary.jsx';
+import AccountSummary from './components/JS/accountSummary.jsx'; 
 import Transaction from './components/JS/transactionForm.jsx';
 import TransactionHistory from './components/JS/transactionHistory.jsx';
 import Notifications from './components/JS/notifications.jsx';
+import StatisticCard from './components/JS/statCard.jsx';
 import './style.css';
 
+
+
+
 const App = () => {
-
     //Nav state setter
-    const [currentPage, setCurrentPage] = useState('accounts'); //or can pass 'transactions' 
-
-
+    const [currentPage, setCurrentPage] = useState('accounts'); 
     //setters and vars for acconts and transactions
     const [showDetails, setShowDetails] = useState(true);
     const [notifications, setNotifications] = useState(null);
@@ -28,10 +29,8 @@ const App = () => {
 
     return (
         <div className="outerContainer">
-            {/* Cleaned up: Navbar now handles the branding and greeting */}
-            <div className="navContainer">
-                <NavBar setPage={setCurrentPage} />
-            </div>
+          <NavBar setPage={setCurrentPage} />
+            
 
             <div className="notifCont">
                 {notifications && (
@@ -41,9 +40,9 @@ const App = () => {
                     />
                  )}
             </div>
+
             {/*Dashboard start*/}
             <div className="dash">
-
                 {/*Left side bar start*/}
                 <aside className="side-Bar-extras">
                     <div className="extra-actions">
@@ -57,7 +56,7 @@ const App = () => {
                         <div className="promo-card">
                             <h4>Vertex Plus</h4>
                             <h5>Plus members benifets include:</h5>
-                            <ul>
+                            <ul className="plus-benefits">
                                 <li>Get Direct desposit early!</li>
                                 <li>Earn 5% cash back on any credit purchase</li>
                                 <li>Access to payNow®</li>
@@ -73,29 +72,34 @@ const App = () => {
                 <main className="main-input">
                     {/*Splitting the accounts summary and transactions actions*/}
                     {currentPage === 'accounts' ? (
-                        <Account
-                            balances={{debitBalance, creditBalance, savingsBalance}}
-                            showDetails={showDetails}
-                            setShowDetails={setShowDetails}
-                            transactions={transactions}           />
-                    ):( <Transaction
-                            balances={{debitBalance, creditBalance, savingsBalance}}
-                            setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
-                            setTransactions={setTransactions}
-                            setNotifications={setNotifications}
-                        />
-                    )}
-
-                    <TransactionHistory transactions={transactions} />
+                        <AccountSummary
+                             balances={{debitBalance, creditBalance, savingsBalance}}
+                             showDetails={showDetails}
+                             setShowDetails={setShowDetails}                
+                             transactions={transactions}           
+                       />
+                    ) : (
+                        <>
+                        <Transaction
+                             balances={{debitBalance, creditBalance, savingsBalance}}
+                             setters={{setDebitBalance, setCreditBalance, setSavingsBalance}}
+                             setTransactions={setTransactions}
+                             setNotifications={setNotifications}
+                       />
+                        <TransactionHistory transactions={transactions} />
+                        </>
+                    )}               
                 </main>
                 {/*Main section end*/}
 
                 {/*Right side bar start*/}
-                <aside className={`side-Bar right ${currentPage === 'accounts' ? 'hidden' : ''}`}>
-                    <div className="feed-container">
+                <aside className="side-Bar right">
+                {currentPage === 'accounts' ? (<StatisticCard />) 
+                : ( <div className="feed-container">
                         <h3>Transaction Feed</h3>
                         <TransactionHistory transactions={transactions} layout="feed" />
                     </div>
+                    )}
                 </aside>
             </div>
         </div>

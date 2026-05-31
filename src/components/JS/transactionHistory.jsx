@@ -1,8 +1,8 @@
 // function for Transaction History
 
-const TransactionHistory = ({ transactions}) => {
-    if(transactions.length === 0){
-        return <p className="NoTransaction">No transactions made yet.</p>;
+const TransactionHistory = ({ transactions = []}) => {
+    if(!transactions || transactions.length === 0){
+        return <p className="NoTransaction" style={{padding: '20px', color: 'var(--ctp-overlay0)'}}>No transactions made yet.</p>;
     }
 
     return (

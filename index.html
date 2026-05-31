@@ -10,10 +10,31 @@
   <body>
     <div id="root">
     </div>
-    <footer>
-      <small>© <script>document.write(new Date().getFullYear())</script>
-        Vertex Bank Corp. All Rights Reserved. Brought to you from a NixOS machine.
-    </small>
+    <footer id="footer">
+      <div class="footer-left">
+        <ul
+          style="
+            list-style: none;
+            display: flex;
+            align-items: start;
+            gap: 1.5rem;
+            flex-direction: row;
+          ">
+          <li><a href=#>Terms of Service</a></li>
+          <li><a href=#>Privacy  Policy</a></li>
+          <li><a href=#>Careers</a></li>
+        </ul>
+      </div>
+      <div id="footer-middle">
+        <span>
+           <small> <script>document.write(new Date().getFullYear())</script>
+              Vertex Bank Corp. All Rights Reserved©  </small>
+      </div>
+      <div class="foot-right">
+        <small>Brought to you from a NixOS machine.</small>
+      </div>
+
+      </span>
     </footer>
     <script type="module" src="/src/main.jsx"></script>
   </body>
