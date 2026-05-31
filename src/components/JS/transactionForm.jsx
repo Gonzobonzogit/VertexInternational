@@ -77,14 +77,6 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
                 <div className="sourceAcct-info">
                     <span>Funding from: <strong>{AccountFacts[activeAccount].name}</strong></span>
                     <h2 className="source-balance">${currentBalance.toLocaleString()}</h2>
-                </div>
-                <select className="pick-acct" value={activeAccount} onChange={(e) => setActiveAccount(e.target.value)}>
-                    <option value="debit">Debit</option>
-                    <option value="savings">Savings</option>
-                    <option value="credit">Credit</option>
-                </select>
-            </div>
-
             <div className="txType-toggle">
                 <button className={txType === 'deposit' ? 'active' : ''} onClick={() => setTxType('deposit')}>Deposit</button>
 
@@ -103,7 +95,7 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
                             <option value="check">Check</option>
                         </select>
                         <label>Amount to Deposit</label>
-                        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="-.--" />
+                        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="--.--" />
                     </div>
                 )}
             </div>
