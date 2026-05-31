@@ -77,6 +77,9 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
                 <div className="sourceAcct-info">
                     <span>Funding from: <strong>{AccountFacts[activeAccount].name}</strong></span>
                     <h2 className="source-balance">${currentBalance.toLocaleString()}</h2>
+                </div>
+            </div>
+
             <div className="txType-toggle">
                 <button className={txType === 'deposit' ? 'active' : ''} onClick={() => setTxType('deposit')}>Deposit</button>
 
@@ -116,9 +119,7 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
                         <label>Amount to Transfer</label>
                         <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" />
                     </div>
-                )}         
-
-
+                )}
 
             {/* PAY FORM */}
                 {txType === 'pay' && (
@@ -131,12 +132,11 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
                         <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="What is this for?" />
                     </div>
                 )}
-            
+
                 <button className="exec-Btn" onClick={handleExec}>
                     Confirm {txType.charAt(0).toUpperCase() + txType.slice(1)}
                 </button>
-            </div>
-        
+        </div>
     );
 }
 
