@@ -7,6 +7,7 @@
     border: 1px solid var(--ctp-surface1);
     border-radius: var(--radius-lg);
     padding: 2rem;
+    width: 100%;
     max-width: 500px;
     margin: 2rem auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);

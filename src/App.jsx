@@ -86,7 +86,6 @@ const App = () => {
                              setTransactions={setTransactions}
                              setNotifications={setNotifications}
                        />
-                        <TransactionHistory transactions={transactions} />
                         </>
                     )}               
                 </main>
