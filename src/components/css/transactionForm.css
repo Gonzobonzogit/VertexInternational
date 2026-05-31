@@ -22,11 +22,14 @@
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--ctp-surface1);
+    min-height: 72px;
 }
 
 .sourceAcct-info {
     flex: 1;
     min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .source-balance {

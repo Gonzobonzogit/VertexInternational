@@ -78,6 +78,11 @@ const Transactions = ({ balances, setters, setTransactions, setNotifications }) 
                     <span>Funding from: <strong>{AccountFacts[activeAccount].name}</strong></span>
                     <h2 className="source-balance">${currentBalance.toLocaleString()}</h2>
                 </div>
+                <select className="pick-acct" value={activeAccount} onChange={(e) => setActiveAccount(e.target.value)}>
+                    <option value="debit">Debit</option>
+                    <option value="savings">Savings</option>
+                    <option value="credit">Credit</option>
+                </select>
             </div>
 
             <div className="txType-toggle">
