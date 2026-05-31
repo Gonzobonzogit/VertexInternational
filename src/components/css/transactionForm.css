@@ -23,6 +23,12 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--ctp-surface1);
 }
+
+.sourceAcct-info {
+    flex: 1;
+    min-width: 0;
+}
+
 .source-balance {
     font-size: 2rem;
     color: var(--ctp-mauve);
@@ -30,6 +36,7 @@
 }
 
 .pick-acct {
+    flex-shrink: 0;
     background: var(--ctp-surface2);
     color: var(--ctp-text);
     border: 1px solid var(--ctp-surface1);
