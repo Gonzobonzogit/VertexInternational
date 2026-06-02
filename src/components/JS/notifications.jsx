@@ -1,6 +1,4 @@
 //Contains function that will handle in app notifications
-
-
 const Notifications = ({ notifications, onDismiss }) => {
   const successColors = { success: "#50fa7b", error: "#ff5555" };
   const color = successColors[notifications.type];

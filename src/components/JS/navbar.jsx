@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../css/navbar.css';
 import  companyLogo from '../../imgs/vertex_international_logo.svg';
 
